@@ -2,6 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # has_secure_password
+  has_one :profile, dependent: :destroy
   before_save { self.email = email.downcase }
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -12,6 +13,16 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: true,
             allow_blank: true
+  after_create :build_profile, if: :user_signin?
+
+  def build_profile
+    Profile.create(user: self)
+  end          
+
+
+  def user_signin?
+    return @current_user.present?
+  end  
 
   def send_otp
     self.verify_otp = rand.to_s[2..7]

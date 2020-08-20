@@ -7,7 +7,7 @@ Rails.application.routes.draw do
         post 'signin' => 'sessions#create'                                          
         delete 'signout' => 'sessions#destroy'    
       end
-      resources :profiles
+      resource :profile, only: [:show, :update]  
       resources :authentication do
         collection do
           post 'validate_otp'

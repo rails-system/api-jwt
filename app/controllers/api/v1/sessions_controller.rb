@@ -11,10 +11,12 @@ class Api::V1::SessionsController < Devise::SessionsController
     login = params[:user][:email].downcase || params[:user][:phone_nunber]
     user = User.where(["phone_number = :value OR email = :value", {value: login}]).first  
     if user.present? && user.valid_password?(params[:user][:password])
-      token = encode(user_id: user.id)
+      token = JsonWebToken.encode(user_id: user.id)
+      profile = user.profile
       render json: {
         success: true,
         auth_token: token,
+        profile: profile
       }, status: :created and return
     else
       render json: {
