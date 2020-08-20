@@ -7,17 +7,16 @@ class Api::V1::ProfilesController < ApplicationController
   end  
   
   def update
-    profile = current_user.profile.update(profile_params)
-    if profile
+    if current_user.profile.update(profile_params)
       render json: { success: true, message: 'update profile successfully' }, status: 200
     else
-      render json: { success: false, message: 'please select valid data' }, status: 200
+      render json: { success: false, message: current_user.profile.errors }, status: 200
     end  
   end
 
   private
 
   def profile_params
-    params.require(:profile).permit(:name, :dob, :marital_status, :gender, :with_whom, :dating_reason, :dating_type, :quesion_1, :quesion_2, :quesion_3, :quesion_4, :quesion_5, :user_id)
+    params.require(:profile).permit(:name, :dob, :marital_status, :gender, :with_whom, :dating_reason, :dating_type, :quesion_1, :quesion_2, :quesion_3, :quesion_4, :quesion_5, :user_id, :image)
   end  
 end

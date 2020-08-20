@@ -11,19 +11,8 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email,
             format: { with: VALID_EMAIL_REGEX },
-            uniqueness: true,
-            allow_blank: true
-  after_create :build_profile, if: :user_signin?
-
-  def build_profile
-    Profile.create(user: self)
-  end          
-
-
-  def user_signin?
-    return @current_user.present?
-  end  
-
+            uniqueness: true
+      
   def send_otp
     self.verify_otp = rand.to_s[2..7]
   end
