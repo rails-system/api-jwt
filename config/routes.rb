@@ -13,6 +13,7 @@ Rails.application.routes.draw do
           post 'validate_otp'
         end  
       end
+      patch '/file_upload' => 'users#file_upload'
     end
   end   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -17,6 +17,6 @@ class Api::V1::ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:name, :dob, :marital_status, :gender, :with_whom, :dating_reason, :dating_type, :quesion_1, :quesion_2, :quesion_3, :quesion_4, :quesion_5, :user_id, :image)
+    params.require(:profile).permit(:name, :dob, :marital_status, :gender, :with_whom, :dating_reason, :dating_type, :quesion_1, :quesion_2, :quesion_3, :quesion_4, :quesion_5, :user_id)
   end  
 end
