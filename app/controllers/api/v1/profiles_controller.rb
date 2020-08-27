@@ -8,7 +8,7 @@ class Api::V1::ProfilesController < ApplicationController
   
   def update
     if current_user.profile.update(profile_params)
-      render json: { success: true, message: 'update profile successfully' }, status: 200
+      render json: { success: true, profile: current_user.profile, message: 'update profile successfully' }, status: 200
     else
       render json: { success: false, message: current_user.profile.errors }, status: 200
     end  
