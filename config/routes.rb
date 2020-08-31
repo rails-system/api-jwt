@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       end
       patch '/file_upload' => 'users#file_upload'
       get '/user_images' => 'users#user_images'
+      get '/quesions_answers' => 'profiles#quesions_answers'
     end
   end   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

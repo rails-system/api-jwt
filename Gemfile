@@ -19,7 +19,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-# gem 'active_model_serializers'
+gem 'active_model_serializers'
 gem 'bcrypt'
 gem 'twilio-ruby'
 gem 'faker'

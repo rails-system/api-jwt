@@ -1,11 +1,16 @@
 class Api::V1::ProfilesController < ApplicationController
-  before_action :authenticate_request!, only: [:update, :show]
+  before_action :authenticate_request!, only: [:update, :show, :quesions_answers]
 
   def show 
     @profile = current_user.profile
     render json: { success: true, profile: @profile ,message: 'update profile successfully' }, status: 200
   end  
   
+  def quesions_answers
+    @profile = current_user.profile
+    render json: { success: true, quesions: ProfileSerializer.new(@profile) ,message: 'update profile successfully' }, status: 200
+  end  
+
   def update
     if current_user.profile.update(profile_params)
       render json: { success: true, profile: current_user.profile, message: 'update profile successfully' }, status: 200
