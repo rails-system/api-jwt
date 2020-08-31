@@ -11,7 +11,7 @@ class Api::V1::UsersController < ApplicationController
 
   def user_images
     @pictures = current_user.pictures
-    render json: { success: true, pictures: @pictures ,message: 'update profile successfully' }, status: 200
+    render json: { success: true, pictures: @pictures, name: current_user&.profile.name, message: 'update profile successfully' }, status: 200
   end  
   
   private
