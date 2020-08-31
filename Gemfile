@@ -19,6 +19,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+# gem 'active_model_serializers'
 gem 'bcrypt'
 gem 'twilio-ruby'
 gem 'faker'
@@ -42,5 +43,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
