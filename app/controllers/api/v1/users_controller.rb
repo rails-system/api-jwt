@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authenticate_request!, only: [:file_upload]
+  before_action :authenticate_request!, only: [:file_upload, :user_images]
 
   def file_upload
     if current_user.update_attributes(user_params)  
@@ -9,6 +9,11 @@ class Api::V1::UsersController < ApplicationController
     end 
   end  
 
+  def user_images
+    @pictures = current_user.pictures
+    render json: { success: true, pictures: @pictures ,message: 'update profile successfully' }, status: 200
+  end  
+  
   private
   # If you have extra params to permit, append them to the sanitizer.
     def user_params
