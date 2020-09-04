@@ -1,6 +1,7 @@
 class Api::V1::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-
+  before_action :authenticate_request!, only: [:destroy]
+  skip_before_action :verify_signed_out_user, if:-> { request.format.json? }
   # GET /resource/sign_in
   # def new
   #   super
@@ -26,9 +27,14 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    if current_user
+      sign_out current_user
+      render json: {success: true, message: 'User Logout successfull'}, status: 200
+    else
+      render json: {success: false, :message => 'Invalid Token'}, :status => 404
+    end
+  end
 
   # protected
 
